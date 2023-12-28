@@ -1,0 +1,37 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+
+    <!-- Form for shortening URLs -->
+    <form action="/shorten_url" method="POST">
+        <input type="url" name="original_url" placeholder="Enter your URL" required>
+        <button type="submit">Shorten URL</button>
+    </form>
+
+    <!-- List of URL mappings -->
+    <ul>
+        {% for short_code, original_url in url_mappings.items() %}
+            <li>
+                {{ original_url }} is shortened to
+                <a href="{{ url_for('redirect_to_original', short_code=short_code) }}" target="_blank">
+                    {{ url_for('redirect_to_original', short_code=short_code) }}
+                </a>
+                <!-- Form for editing URL -->
+                <form action="/edit_url/{{ short_code }}" method="POST">
+                    <input type="url" name="updated_url" placeholder="Edit URL" required>
+                    <button type="submit">Update</button>
+                </form>
+                <!-- Delete link -->
+                <a href="/delete_url/{{ short_code }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
