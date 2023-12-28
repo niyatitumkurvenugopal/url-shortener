@@ -13,3 +13,7 @@ Key features include:
 - *Docker Containerization:* The application is containerized using Docker, ensuring portability, easy deployment, and isolation.
 
 This URL Shortener project serves as a practical tool for simplifying and managing lengthy URLs, making it convenient for users to share and access links.
+
+It has been hosted in docker using these command:
+docker build -t url-shortner . 
+ docker run -p 5000:5000 url-shortner
